@@ -23,6 +23,23 @@ namespace SqlSaturdayCode.Controllers
             return View(evt);
         }
 
+        [HttpGet]
+        public ActionResult EditEvent(int id)
+        {
+            var evt = DocumentSession.Load<Event>(id);
+
+            return View(evt);
+        }        
+        
+        [HttpPost]
+        public ActionResult EditEvent(Event evt)
+        {
+            evt.Id = "events/" + evt.Id;
+            DocumentSession.Store(evt);
+
+            return RedirectToAction("ViewEvent", new {id = evt.Id.ToIntId()});
+        }
+
         public ActionResult NewEvent()
         {
             var newEvent = new Event
