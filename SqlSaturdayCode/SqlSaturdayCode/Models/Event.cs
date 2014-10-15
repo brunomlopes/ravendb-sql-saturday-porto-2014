@@ -8,7 +8,7 @@ namespace SqlSaturdayCode.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTimeOffset Date { get; set; }
-        public string[] Tags { get; set; }
+        public string[] tags { get; set; }
         public EventState State { get; set; }
         public EventSession[] Sessions { get; set; }
     }
