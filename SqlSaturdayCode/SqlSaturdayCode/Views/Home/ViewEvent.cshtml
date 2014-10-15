@@ -1,4 +1,5 @@
-﻿@model SqlSaturdayCode.Models.Event
+﻿@using SqlSaturdayCode.Helpers
+@model SqlSaturdayCode.Models.Event
 
 @{
     ViewBag.Title = "ViewEvent";
@@ -33,14 +34,19 @@
         <dd>
             @Html.DisplayFor(model => model.Date)
         </dd>
-        
+        <dt>
+            @Html.DisplayNameFor(model => model.tags)
+        </dt>
+        <dd>
+            @string.Join(", ", Model.tags)
+        </dd>
         @foreach (var session in Model.Sessions)
         {
-            @Html.Partial("_Session", session)}
+            @Html.Partial("_Session", session)
         }
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "EditEvent", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "EditEvent", new { id = Model.Id.ToIntId() }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

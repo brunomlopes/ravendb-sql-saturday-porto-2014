@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using SqlSaturdayCode.Helpers;
 using SqlSaturdayCode.Models;
 
 namespace SqlSaturdayCode.Controllers
@@ -70,7 +71,7 @@ namespace SqlSaturdayCode.Controllers
                 }
             };
             DocumentSession.Store(newEvent);
-            return RedirectToAction("ViewEvent", new { id = newEvent.Id.Split('/')[1] });
+            return RedirectToAction("ViewEvent", new { id = newEvent.Id.ToIntId() });
         }
     }
 }
