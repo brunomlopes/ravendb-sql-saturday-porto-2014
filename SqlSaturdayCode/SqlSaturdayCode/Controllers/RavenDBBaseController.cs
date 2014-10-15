@@ -15,7 +15,7 @@ namespace SqlSaturdayCode.Controllers
 
         protected override void OnResultExecuted(ResultExecutedContext filterContext)
         {
-            if(filterContext.Exception != null)
+            if (filterContext.Exception == null)
             {
                 // any exception during request rollbacks changes
                 DocumentSession.SaveChanges();
