@@ -3,6 +3,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Indexes;
+using SqlSaturdayCode.Models;
 
 namespace SqlSaturdayCode
 {
@@ -27,6 +29,8 @@ namespace SqlSaturdayCode
             {
                 ConnectionStringName = "RavenDB"
             }.Initialize();
+
+            IndexCreation.CreateIndexes(typeof(SessionsForSpeaker).Assembly, DocumentStore);
         }
     }
 }

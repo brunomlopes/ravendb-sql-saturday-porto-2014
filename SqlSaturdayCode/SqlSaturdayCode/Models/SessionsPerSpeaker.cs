@@ -11,29 +11,30 @@ namespace SqlSaturdayCode.Models
             public string SpeakerName { get; set; }
             public int NumberOfSessions { get; set; }
         }
+
         public override string IndexName
         {
-            get
-            {
-                return "SessionsPerSpeaker";
-            }
+            get { return "SessionsPerSpeaker"; }
         }
+
         public override IndexDefinition CreateIndexDefinition()
         {
             return new IndexDefinition
             {
-                Maps =  {
+                Maps =
+                {
                     @"from speaker in docs.Speakers
 select new {
 	SpeakerId = speaker.Id,
 	SpeakerName = speaker.Name,
 	NumberOfSessions = 0
 }",
-                    @"from speaker in docs.Speakers
+                    @"from evt in docs.Events
+from session in evt.Sessions
 select new {
-	SpeakerId = speaker.Id,
-	SpeakerName = speaker.Name,
-	NumberOfSessions = 0
+	SpeakerId = session.SpeakerId,
+	SpeakerName = (string)null,
+	NumberOfSessions = 1
 }"
                 },
                 Reduce = @"from result in results
