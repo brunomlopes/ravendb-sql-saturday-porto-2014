@@ -37,7 +37,7 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @string.Join(", ", item.tags)
+            @Html.Raw(string.Join(", ", item.tags.Select(tag => Html.ActionLink(tag, "ListEvents", new {tag}))))
         </td>
         <td>
             @Html.ActionLink("Edit", "EditEvent", new { id = item.Id.ToIntId() }) |

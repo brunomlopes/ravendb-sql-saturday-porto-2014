@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Raven.Client.Linq;
 using SqlSaturdayCode.Helpers;
 using SqlSaturdayCode.Models;
 
@@ -25,10 +26,14 @@ namespace SqlSaturdayCode.Controllers
             return View(evt);
         }
 
-        public ActionResult ListEvents()
+        public ActionResult ListEvents(string tag)
         {
-            var events = DocumentSession.Query<Event>()
-                .OrderBy(e => e.Date)
+            var query = DocumentSession.Query<Event>().OrderBy(e => e.Date);
+            if (!string.IsNullOrWhiteSpace(tag))
+            {
+                query = query.Where(e => e.tags.Contains(tag));
+            }
+            var events = query
                 .Take(10)
                 .ToList();
             return View(events);
