@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using SqlSaturdayCode.Helpers;
 using SqlSaturdayCode.Models;
@@ -22,6 +23,15 @@ namespace SqlSaturdayCode.Controllers
         {
             var evt = DocumentSession.Load<Event>(id);
             return View(evt);
+        }
+
+        public ActionResult ListEvents()
+        {
+            var events = DocumentSession.Query<Event>()
+                .OrderBy(e => e.Date)
+                .Take(10)
+                .ToList();
+            return View(events);
         }
 
         [HttpGet]

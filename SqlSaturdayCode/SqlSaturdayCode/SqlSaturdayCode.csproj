@@ -166,6 +166,7 @@
     <Content Include="Views\Home\ViewEvent.cshtml" />
     <Content Include="Views\Home\_Session.cshtml" />
     <Content Include="Views\Home\EditEvent.cshtml" />
+    <Content Include="Views\Home\ListEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
