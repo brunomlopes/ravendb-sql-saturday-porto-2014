@@ -24,6 +24,15 @@ namespace SqlSaturdayCode.Controllers
             if (queryResult != null)
                 ViewBag.NumberOfSessions = queryResult.NumberOfSessions;
 
+            var sessionsForThisSpeaker = DocumentSession.Query<SessionsForSpeaker.Result, SessionsForSpeaker>()
+                .OrderByDescending(e => e.EventDate)
+                .Where(e => e.SpeakerId == speaker.Id)
+                .TransformWith<SessionsForSpeakerFromEvent, EventSession>()
+                .AddTransformerParameter("speakerId", speaker.Id)
+                .Take(3)
+                .ToList();
+
+            ViewBag.Sessions = sessionsForThisSpeaker;
             return View(speaker);
         }
 
