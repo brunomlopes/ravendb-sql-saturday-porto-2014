@@ -17,6 +17,13 @@ namespace SqlSaturdayCode.Controllers
         public ActionResult Speaker(int id)
         {
             var speaker = DocumentSession.Load<Speaker>(id);
+            var queryResult = DocumentSession.Query<SessionsPerSpeaker.Result, SessionsPerSpeaker>()
+                .FirstOrDefault(r => r.SpeakerId == speaker.Id);
+            
+            ViewBag.NumberOfSessions = 0;
+            if (queryResult != null)
+                ViewBag.NumberOfSessions = queryResult.NumberOfSessions;
+
             return View(speaker);
         }
 
