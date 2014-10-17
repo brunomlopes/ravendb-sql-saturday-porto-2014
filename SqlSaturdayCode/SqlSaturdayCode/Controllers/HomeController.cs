@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Raven.Client;
 using Raven.Client.Linq;
 using SqlSaturdayCode.Helpers;
 using SqlSaturdayCode.Models;
@@ -27,8 +28,7 @@ namespace SqlSaturdayCode.Controllers
             var sessionsForThisSpeaker = DocumentSession.Query<SessionsForSpeaker.Result, SessionsForSpeaker>()
                 .OrderByDescending(e => e.EventDate)
                 .Where(e => e.SpeakerId == speaker.Id)
-                .TransformWith<SessionsForSpeakerFromEvent, EventSession>()
-                .AddTransformerParameter("speakerId", speaker.Id)
+                .ProjectFromIndexFieldsInto<SessionsForSpeaker.Result>()
                 .Take(3)
                 .ToList();
 

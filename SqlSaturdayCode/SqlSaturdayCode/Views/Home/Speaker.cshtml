@@ -8,7 +8,7 @@
 <h2>Speaker page for <b>@Model.Name</b> (with @ViewBag.NumberOfSessions sessions)</h2>
 
 
-@foreach (EventSession session in ViewBag.Sessions)
+@foreach (SessionsForSpeaker.Result session in ViewBag.Sessions)
 {
     <h3>
         @session.Title
