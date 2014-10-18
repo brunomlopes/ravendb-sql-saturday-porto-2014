@@ -30,7 +30,7 @@ namespace SqlSaturdayCode
                 ConnectionStringName = "RavenDB"
             }.Initialize();
 
-            IndexCreation.CreateIndexes(typeof(SessionsForSpeaker).Assembly, DocumentStore);
+            IndexCreation.CreateIndexes(typeof(SessionsPerSpeaker).Assembly, DocumentStore);
         }
     }
 }
