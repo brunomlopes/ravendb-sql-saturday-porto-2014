@@ -1,0 +1,49 @@
+﻿@using SqlSaturdayCode.Helpers
+@model IEnumerable<SqlSaturdayCode.Models.Event>
+
+@{
+    ViewBag.Title = "ListEvents";
+}
+
+<h2>ListEvents</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tags)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.Raw(string.Join(", ", item.tags.Select(tag => Html.ActionLink(tag, "ListEvents", new {tag}))))
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditEvent", new { id = item.Id.ToIntId() }) |
+            @Html.ActionLink("Details", "ViewEvent", new { id = item.Id.ToIntId() })
+        </td>
+    </tr>
+}
+
+</table>

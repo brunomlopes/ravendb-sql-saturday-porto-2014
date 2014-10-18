@@ -1,0 +1,19 @@
+﻿@using SqlSaturdayCode.Models
+@model SqlSaturdayCode.Models.Speaker
+
+@{
+    ViewBag.Title = Model.Name + " - Speaker";
+}
+
+<h2>Speaker page for <b>@Model.Name</b> (with @ViewBag.NumberOfSessions sessions)</h2>
+
+
+@foreach (SessionsForSpeaker.Result session in ViewBag.Sessions)
+{
+    <h3>
+        @session.Title
+    </h3>
+    <p>
+        @session.Description
+    </p>
+}
